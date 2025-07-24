@@ -1,30 +1,33 @@
 import { HeaderOptions } from "../../utils/types";
+import { HEADER } from "../../utils/data"; 
 
 interface HeaderProps {
-   headerData: HeaderOptions;
+    headerData?: HeaderOptions;
 }
 
-export const Header = ({headerData}:HeaderProps) => {
-    if (!headerData) {
-        return null; // If no header data is provided, render nothing
-    }
+export const Header = ({ headerData = HEADER[0] }: HeaderProps) => {
+    if (!headerData) return null;
+
+    const titleParts = headerData.title.split(' ');
+    const firstTitlePart = titleParts[0];
+    const remainingTitle = titleParts.slice(1).join(' ');
+
     return (
         <header className="bg-gradient-to-b from-blue-700 to-blue-400 text-white py-10 px-4 shadow-xl">
             <div className="max-w-6xl mx-auto flex flex-col justify-between h-full">
                 <div className="flex justify-between items-start mb-8">
                     <div>
-                    <h1 className="text-2xl mt-8 md:text-1xl font-bold pl-9 mb-1">{headerData.title.split(' ')[0]}</h1>
-                    <h1 className="text-20xl md:text-8xl font-bold mb-1 pl-4">{headerData.title.split(' ').slice(1).join (' ')}</h1>
-                        <p className="text-orange-300 font-medium text-xl pl-2 ">{headerData.description}</p>
+                        <h1 className="text-2xl mt-8 md:text-1xl font-bold pl-9 mb-1">{firstTitlePart}</h1>
+                        <h1 className="text-20xl md:text-8xl font-bold mb-1 pl-4">{remainingTitle}</h1>
+                        <p className="text-orange-300 font-medium text-xl pl-2">{headerData.description}</p>
                     </div>
                     <button 
                         onClick={() => window.location.href = '/'}
-                            className="mt-8 bg-gradient-to-r from-white to-cyan-200 text-blue-800 text-md font-semibold py-3 px-6 rounded-full shadow-lg hover:shadow-xl transition-all font-sans whitespace-nowrap"
+                        className="mt-8 bg-gradient-to-r from-white to-cyan-200 text-blue-800 text-md font-semibold py-3 px-6 rounded-full shadow-lg hover:shadow-xl transition-all font-sans whitespace-nowrap"
                     >
                         {headerData.buttonText}
                     </button>
                 </div>
-                
                 <div className="h-16"></div>
             </div>
         </header>

@@ -1,5 +1,5 @@
-import { ServiceOptions } from './types';
-import { HeaderOptions } from './types';
+import { ServiceOptions, HeaderOptions } from './types';
+
 
 export const SERVICES: ServiceOptions[] = [
     {
