@@ -1,9 +1,11 @@
 
-import { Header } from '../assets/components/Header';
+import { Header } from '../components/header/Header';
+
 
 export const Home = () => {
     return (
         <Header/>
+        
 
     );
 };

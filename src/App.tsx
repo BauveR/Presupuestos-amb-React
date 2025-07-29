@@ -1,12 +1,18 @@
-import './App.css';
-import { Home } from './pages/Home';
+// src/App.tsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Welcome } from './components/welcome/Welcome';
+import { Presupuesto } from './pages/Presupuesto';
+import { BudgetProvider } from './context/BudgetProvider';
 
-function App() {
-    return (
-
-      <Home />
-        
-    );
-}
-
-export default App;
+export const App = () => {
+  return (
+    <BrowserRouter>
+      <BudgetProvider>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/presupuesto" element={<Presupuesto />} />
+        </Routes>
+      </BudgetProvider>
+    </BrowserRouter>
+  );
+};
