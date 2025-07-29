@@ -1,4 +1,3 @@
-// BudgetSummary.tsx (componente principal refactorizado)
 import { useState } from 'react';
 import { useBudget } from '../../context/BudgetProvider';
 import { SelectedServices } from './SelectedServices';
@@ -35,12 +34,22 @@ export const BudgetSummary = () => {
     setShowForm(false);
   };
 
+  const generateSharedURL = () => {
+    const name = encodeURIComponent(customerInfo.name);
+    const services = selectedServices.map(s => s.code).join(',');
+    const totalFormatted = total.toFixed(2);
+    const discount = discountedTotal?.toFixed(2) ?? '';
+
+    const query = `name=${name}&services=${services}&total=${totalFormatted}&discount=${discount}`;
+    return `${window.location.origin}/shared-budget?${query}`;
+  };
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 sticky top-6">
-      <h2 className="text-2xl font-bold text-gray-600 mb-4">Resumen del Presupuesto</h2>
+      <h2 className="text-2xl font-bold text-gray-600 mb-4">Budget Summary</h2>
 
       {selectedServices.length === 0 ? (
-        <p className="text-gray-500 italic">No hay servicios seleccionados</p>
+        <p className="text-gray-500 italic">No services selected</p>
       ) : (
         <>
           <SelectedServices services={selectedServices} />
@@ -50,12 +59,26 @@ export const BudgetSummary = () => {
             onApplyDiscount={applyAnnualDiscount}
             onResetDiscount={resetDiscount}
           />
+
+          {!showForm && (
+            <button
+              onClick={() => {
+                const url = generateSharedURL();
+                navigator.clipboard.writeText(url);
+                alert("Link copied to clipboard");
+              }}
+              className="w-full mt-2 bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded"
+            >
+              Share budget
+            </button>
+          )}
+
           {!showForm ? (
             <button
               onClick={handleSave}
               className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded"
             >
-              Guardar Presupuesto
+              Save budget
             </button>
           ) : (
             <CustomerForm

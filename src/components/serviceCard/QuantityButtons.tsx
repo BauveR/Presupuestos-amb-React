@@ -24,7 +24,7 @@ export const QuantityButtons = ({
       <motion.button
         onClick={onDecrement}
         disabled={value <= min}
-        className="bg-orange-500 hover:bg-orange-400 text-white font-bold py-1 px-3 rounded-l disabled:opacity-50"
+        className="bg-orange-500 hover:bg-orange-400 text-white font-bold py-1 px-3 rounded-full disabled:opacity-50"
         whileTap={{ scale: 0.95 }}
       >
         -
@@ -33,7 +33,7 @@ export const QuantityButtons = ({
       <motion.button
         onClick={onIncrement}
         disabled={value >= max}
-        className="bg-orange-500 hover:bg-orange-400 text-white font-bold py-1 px-3 rounded-r disabled:opacity-50"
+        className="bg-orange-500 hover:bg-orange-400 text-white font-bold py-1 px-3 rounded-full disabled:opacity-50"
         whileTap={{ scale: 0.95 }}
       >
         +

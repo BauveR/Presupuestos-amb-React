@@ -1,30 +1,13 @@
 // components/Header/Header.tsx
 import { HeaderOptions } from '../../types/types';
 import { DEFAULT_HEADER } from './headerData';
-import { DEFAULT_QUANTITY_CONFIG, DEFAULT_QUANTITY_STYLES } from '../../config/quantityConfig';
 
 interface HeaderProps {
   headerData?: HeaderOptions;
-  quantity?: number;
-  onQuantityChange?: (newValue: number) => void;
 }
 
-export const Header = ({
-  headerData = DEFAULT_HEADER,
-  quantity = 1,
-  onQuantityChange,
-}: HeaderProps) => {
+export const Header = ({ headerData = DEFAULT_HEADER }: HeaderProps) => {
   if (!headerData) return null;
-
-  const handleIncrement = () => {
-    const newValue = Math.min(quantity + 1, DEFAULT_QUANTITY_CONFIG.max || 10);
-    onQuantityChange?.(newValue);
-  };
-
-  const handleDecrement = () => {
-    const newValue = Math.max(quantity - 1, DEFAULT_QUANTITY_CONFIG.min || 1);
-    onQuantityChange?.(newValue);
-  };
 
   const titleParts = headerData.title.split(' ');
   const firstTitlePart = titleParts[0];

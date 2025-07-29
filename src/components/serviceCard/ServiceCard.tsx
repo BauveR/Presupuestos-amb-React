@@ -53,7 +53,7 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
             type="checkbox"
             checked={isSelected}
             onChange={() => toggleService(service)}
-            className="form-checkbox h-6 w-6 text-blue-600 rounded"
+            className="form-checkbox h-6 w-6 text-blue-800 rounded"
           />
         </label>
       </div>
