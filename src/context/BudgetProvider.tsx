@@ -1,4 +1,4 @@
-// context/BudgetProvider.tsx
+ 
 import { createContext, ReactNode, useContext } from 'react';
 import { useServiceSelection } from '../hooks/useServiceSelection';
 import { useBudgetManager } from '../hooks/useBudgetManager';

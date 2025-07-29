@@ -1,20 +1,41 @@
-// components/Welcome/Welcome.tsx
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Title } from './Title';
 import { ScrollIndicator } from './ScrollIndicator';
 
 export const Welcome = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollEndRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.95]);
+  const y = useTransform(scrollYProgress, [0, 0.6], [0, -20]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          navigate('/presupuesto');
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (scrollEndRef.current) {
+      observer.observe(scrollEndRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [navigate]);
 
   return (
     <div ref={containerRef} className="h-[200vh] relative">
@@ -45,13 +66,11 @@ export const Welcome = () => {
         <ScrollIndicator />
       </motion.div>
 
-      <div className="absolute top-[100vh] w-full min-h-screen bg-gray-50">
-        {/* Aquí cargamos la home completa */}
-        <Link to="/presupuesto">
-          <div className="text-center pt-20 text-gray-400 text-sm hover:underline">
-            o ve directo al generador de presupuestos →
-          </div>
-        </Link>
+      {/* Punto de activación al hacer scroll */}
+      <div
+        ref={scrollEndRef}
+        className="absolute top-[100vh] w-full min-h-screen bg-gray-50 flex items-center justify-center"
+      >
       </div>
     </div>
   );

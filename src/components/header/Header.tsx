@@ -1,6 +1,5 @@
 // components/Header/Header.tsx
 import { HeaderOptions } from '../../types/types';
-import { QuantitySelector } from '../quantitySelector/QuantitySelector';
 import { DEFAULT_HEADER } from './headerData';
 import { DEFAULT_QUANTITY_CONFIG, DEFAULT_QUANTITY_STYLES } from '../../config/quantityConfig';
 
@@ -53,13 +52,6 @@ export const Header = ({
             >
               {headerData.buttonText}
             </button>
-            <QuantitySelector
-              value={quantity}
-              onIncrement={handleIncrement}
-              onDecrement={handleDecrement}
-              config={DEFAULT_QUANTITY_CONFIG}
-              styles={DEFAULT_QUANTITY_STYLES}
-            />
           </div>
         </div>
         <div className="h-16"></div>

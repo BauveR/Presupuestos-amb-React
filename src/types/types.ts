@@ -29,12 +29,14 @@ export interface CustomerInfo {
 
 // Presupuesto guardado
 export interface Budget {
+  id: string;
   customerInfo: CustomerInfo;
   services: SelectedService[];
   total: number;
-  discountedTotal: number | null; // siempre está definido aunque sea null
+  discountedTotal: number | null;
   date: Date;
 }
+
 
 // Contexto principal de presupuesto
 export interface BudgetContextType {
@@ -56,3 +58,13 @@ export interface BudgetContextType {
   savedFilteredBudgets: Budget[];
   orderedBy: string; // 'NAME' | 'DATE'
 }
+
+export interface BudgetRecord {
+  customerInfo: CustomerInfo;
+  services: SelectedService[];
+  total: number;
+  discountedTotal: number | null;
+  date: Date;
+}
+
+
